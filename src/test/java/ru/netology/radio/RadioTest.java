@@ -3,6 +3,64 @@ package ru.netology.radio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 public class RadioTest {
+
+    @Test
+    public void testCurrentStationNumDontUserSet() {
+        Radio radio = new Radio();
+        radio.setCurrentStationNum(5);
+        Assertions.assertEquals(5, radio.getCurrentStationNum());
+        radio.setCurrentStationNum(-1);
+        Assertions.assertEquals(5, radio.getCurrentStationNum());
+        radio.setCurrentStationNum(9);
+        Assertions.assertEquals(9, radio.getCurrentStationNum());
+        radio.setCurrentStationNum(10);
+        Assertions.assertEquals(9, radio.getCurrentStationNum());
+    }
+    @Test
+    public void testCurrentStationNumByUserSet() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStationNum(15);
+        Assertions.assertEquals(15, radio.getCurrentStationNum());
+        radio.setCurrentStationNum(-1);
+        Assertions.assertEquals(15, radio.getCurrentStationNum());
+        radio.setCurrentStationNum(29);
+        Assertions.assertEquals(29, radio.getCurrentStationNum());
+        radio.setCurrentStationNum(30);
+        Assertions.assertEquals(29, radio.getCurrentStationNum());
+    }
+    @Test
+    public void testNumOfStations() {
+        Radio radio = new Radio(30);
+        Assertions.assertEquals(30, radio.rangeStationNum);
+    }
+    @Test
+    public void testNextStations() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStationNum(29);
+        radio.next();
+        Assertions.assertEquals(0, radio.getCurrentStationNum());
+        radio.setCurrentStationNum(14);
+        radio.next();
+        Assertions.assertEquals(15, radio.getCurrentStationNum());
+    }
+    @Test
+    public void testPrevStations() {
+        Radio radio = new Radio(30);
+        radio.setCurrentStationNum(0);
+        radio.prev();
+        Assertions.assertEquals(29, radio.getCurrentStationNum());
+        radio.setCurrentStationNum(15);
+        radio.prev();
+        Assertions.assertEquals(14, radio.getCurrentStationNum());
+    }
+    @Test
+    public void shouldStation() {
+        Radio radio = new Radio();
+
+        radio.setCurrentStationNum(8);
+        radio.next();
+        Assertions.assertEquals(9, radio.getCurrentStationNum());
+    }
     @Test
     public void shouldSetNextStationBorder() {
         Radio radio = new Radio();
